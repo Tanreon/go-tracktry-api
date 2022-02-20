@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"time"
 
 	HttpRunner "github.com/Tanreon/go-http-runner"
 	log "github.com/sirupsen/logrus"
@@ -120,15 +121,16 @@ func (t *Tracktry) IsDelivered() (isDelivered bool, err error) {
 			return isDelivered, fmt.Errorf("marshaling error: %w", err)
 		}
 
-		response, err := t.runner.PostJson(HttpRunner.JsonRequestData{
-			Url:   API_SERVER + "/v1/trackings/realtime",
-			Value: realtimeRequestBytes,
-			Headers: map[string]string{
-				"Tracktry-Api-Key": t.apiToken,
-			},
+		jsonRequestData := HttpRunner.NewJsonRequestData(API_SERVER + "/v1/trackings/realtime")
+		jsonRequestData.SetHeaders(map[string]string{
+			"Tracktry-Api-Key": t.apiToken,
 		})
+		jsonRequestData.SetValue(realtimeRequestBytes)
+		jsonRequestData.SetTimeoutOption(time.Second * 120)
+
+		response, err := t.runner.PostJson(jsonRequestData)
 		if err != nil {
-			return isDelivered, fmt.Errorf("/v2/trackings/realtime response error: %w", err)
+			return isDelivered, fmt.Errorf("/v1/trackings/realtime response error: %w", err)
 		}
 
 		var realtimeResponse RealtimeResponse

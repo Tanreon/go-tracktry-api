@@ -26,7 +26,7 @@ var OnTracPatterns = []*regexp.Regexp{ // https://www.trackingmore.com/tracking-
 }
 
 var LaserShipPatterns = []*regexp.Regexp{ // https://www.trackingmore.com/tracking-status-detail-en-268.html
-	regexp.MustCompile(`(?i)^\s*LW\d{8,}|\s*LX\d{8,}|\s*1LS\d{12,}$`),
+	regexp.MustCompile(`(?i)^\s*LW\d{8,}|\s*LX\d{8,}|\s*1LS\w{12,}$`),
 }
 
 var DHLPatterns = []*regexp.Regexp{ // https://github.com/jkeen/tracking_number_data/blob/main/couriers/dhl.json

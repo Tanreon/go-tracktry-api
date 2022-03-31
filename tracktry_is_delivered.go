@@ -100,17 +100,17 @@ func (t *Tracktry) IsDelivered() (isDelivered bool, err error) {
 	}
 
 	switch carrier {
-	case "fedex":
+	case FEDEX_CARRIER:
 		fallthrough
-	case "ups":
+	case UPS_CARRIER:
 		fallthrough
-	case "usps":
+	case USPS_CARRIER:
 		fallthrough
-	case "ontrac":
+	case ONTRAC_CARRIER:
 		fallthrough
-	case "lasership":
+	case LASERSHIP_CARRIER:
 		fallthrough
-	case "dhl":
+	case DHL_CARRIER:
 		realtimeRequest := RealtimeRequest{
 			TrackingNumber: t.code,
 			CarrierCode:    carrier,
@@ -149,9 +149,9 @@ func (t *Tracktry) IsDelivered() (isDelivered bool, err error) {
 		}
 
 		return isDelivered, ErrApiUnknownError
-	case "shipt":
+	case SHIPT_CARRIER:
 		fallthrough
-	case "amazon":
+	case AMAZON_CARRIER:
 		return isDelivered, ErrCarrierDisabled
 	}
 

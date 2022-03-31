@@ -44,14 +44,14 @@ var AmazonPatterns = []*regexp.Regexp{
 
 func (t *Tracktry) RecognizeCarrier() (carrier string, err error) {
 	carriersPatterns := map[string][]*regexp.Regexp{
-		"fedex":     FedexPatterns,
-		"ups":       UPSPatterns,
-		"usps":      USPSPatterns,
-		"ontrac":    OnTracPatterns,
-		"lasership": LaserShipPatterns,
-		"dhl":       DHLPatterns,
-		"shipt":     ShiptPatterns,
-		"amazon":    AmazonPatterns,
+		FEDEX_CARRIER:     FedexPatterns,
+		UPS_CARRIER:       UPSPatterns,
+		USPS_CARRIER:      USPSPatterns,
+		ONTRAC_CARRIER:    OnTracPatterns,
+		LASERSHIP_CARRIER: LaserShipPatterns,
+		DHL_CARRIER:       DHLPatterns,
+		SHIPT_CARRIER:     ShiptPatterns,
+		AMAZON_CARRIER:    AmazonPatterns,
 	}
 
 	for carrier, carrierPatterns := range carriersPatterns {

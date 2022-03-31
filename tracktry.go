@@ -11,6 +11,15 @@ import (
 
 const API_SERVER = "https://api.tracktry.com"
 
+const FEDEX_CARRIER = "fedex"
+const UPS_CARRIER = "ups"
+const USPS_CARRIER = "usps"
+const ONTRAC_CARRIER = "ontrac"
+const LASERSHIP_CARRIER = "lasership"
+const DHL_CARRIER = "dhl"
+const SHIPT_CARRIER = "shipt"
+const AMAZON_CARRIER = "amazon"
+
 var ErrCarrierUnrecognized = errors.New("CARRIER_UNRECOGNIZED")
 var ErrTrackCodeIsNotValid = errors.New("TRACK_CODE_IS_NOT_VALID")
 var ErrCarrierDisabled = errors.New("CARRIER_DISABLED")
@@ -27,6 +36,7 @@ type ITracktry interface {
 	Code() string
 	IsValid() (isValid bool)
 	IsDelivered() (isDelivered bool, err error)
+	RecognizeCarrier() (carrier string, err error)
 }
 
 func (t *Tracktry) Code() string {

@@ -42,7 +42,7 @@ var AmazonPatterns = []*regexp.Regexp{
 	regexp.MustCompile(`(?i)^\s*TBA\d{10,12}$`),
 }
 
-func (t *Tracktry) recognizeCarrier() (carrier string, err error) {
+func (t *Tracktry) RecognizeCarrier() (carrier string, err error) {
 	carriersPatterns := map[string][]*regexp.Regexp{
 		"fedex":     FedexPatterns,
 		"ups":       UPSPatterns,
@@ -66,7 +66,7 @@ func (t *Tracktry) recognizeCarrier() (carrier string, err error) {
 }
 
 func (t *Tracktry) IsValid() (isValid bool) {
-	_, err := t.recognizeCarrier()
+	_, err := t.RecognizeCarrier()
 	if err != nil {
 		return false
 	}

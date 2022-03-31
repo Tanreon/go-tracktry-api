@@ -94,7 +94,7 @@ func (t *Tracktry) IsDelivered() (isDelivered bool, err error) {
 		return isDelivered, ErrTrackCodeIsNotValid
 	}
 
-	carrier, err := t.recognizeCarrier()
+	carrier, err := t.RecognizeCarrier()
 	if err != nil {
 		return isDelivered, err
 	}

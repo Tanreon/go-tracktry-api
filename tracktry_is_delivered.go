@@ -121,14 +121,14 @@ func (t *Tracktry) IsDelivered() (isDelivered bool, err error) {
 			return isDelivered, fmt.Errorf("marshaling error: %w", err)
 		}
 
-		jsonRequestData := HttpRunner.NewJsonRequestData(API_SERVER + "/v1/trackings/realtime")
-		jsonRequestData.SetHeaders(map[string]string{
+		jsonRequestOptions := HttpRunner.NewJsonRequestOptions(API_SERVER + "/v1/trackings/realtime")
+		jsonRequestOptions.SetHeaders(map[string]string{
 			"Tracktry-Api-Key": t.apiToken,
 		})
-		jsonRequestData.SetValue(realtimeRequestBytes)
-		jsonRequestData.SetTimeoutOption(time.Second * 120)
+		jsonRequestOptions.SetValue(realtimeRequestBytes)
+		jsonRequestOptions.SetTimeoutOption(time.Second * 120)
 
-		response, err := t.runner.PostJson(jsonRequestData)
+		response, err := t.runner.PostJson(jsonRequestOptions)
 		if err != nil {
 			return isDelivered, fmt.Errorf("/v1/trackings/realtime response error: %w", err)
 		}
